@@ -143,13 +143,13 @@ Future improvements:
 ### 📄 Project Artifacts
 
 * 📓 **Jupyter Notebook:**
-notebooks/employee_attrition_analysis.ipynb
+salifort_motors_capstone_project.ipynb
 
 * 📄 **Notebook PDF:**
-reports/employee_attrition_notebook.pdf
+salifort_motors_capstone_project.pdf
 
 * ✍️ **Medium Blog Post:**
-(Add link here once published)
+(https://medium.com/@yanpuwentao/why-do-they-leave-uncovering-employee-retention-secrets-with-data-8fe5ea297ab7)
 
 ### 🛠️ Tech Stack
 
