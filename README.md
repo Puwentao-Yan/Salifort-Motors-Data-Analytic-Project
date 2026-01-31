@@ -1,72 +1,166 @@
-# Employee Attrition Prediction – Salifort Motors
+# Why Do They Leave?
+## Uncovering Employee Retention Secrets with Data
 
-## Project Overview
-This project analyzes employee data from **Salifort Motors** to identify the key factors that contribute to employee attrition and to build a predictive model that estimates the likelihood of an employee leaving the company.
+### 📊 Employee Attrition Analysis | Logistic Regression | HR Analytics
 
-Employee turnover is costly and disruptive. Using data analysis and machine learning, this project provides data-driven insights to help the HR department improve employee retention and workforce planning.
+This project analyzes employee attrition using HR data from a fictional company, **Salifort Motors**, to uncover the key factors that influence whether employees leave or stay. The work was completed as the **final capstone project for the Google Advanced Data Analytics Professional Certificate**.
 
-## Business Problem
-The HR department collected historical employee data but lacked clarity on:
-- Why employees leave the company  
-- Which factors most strongly influence attrition  
-- How to proactively identify employees at risk of leaving  
+Rather than chasing raw prediction accuracy, the focus of this project is **interpretability and actionable business insight**, helping HR teams understand why employees leave and where interventions should be targeted.
 
-**Core question:**  
-> What factors are most likely to cause an employee to leave the company?
+### 🔍 Business Problem
 
-## Objectives
-- Explore and clean HR employee data  
-- Identify patterns and drivers of employee attrition  
-- Build and evaluate a predictive classification model  
-- Translate model outputs into actionable HR recommendations  
+Employee turnover is costly. Recruiting, onboarding, and lost productivity make replacing an employee significantly more expensive than retaining one.
 
-## Dataset
-The dataset contains approximately **15,000 employee records** with features related to:
-- Job satisfaction and performance evaluations  
-- Workload and tenure  
-- Promotions and work accidents  
-- Department and salary level  
-- Attrition status (target variable)  
+**Stakeholder Question:**
 
-## Methodology
-This project follows the **PACE framework**:
-- **Plan** – Understand the business context and data  
-- **Analyze** – Perform exploratory data analysis (EDA) and visualizations  
-- **Construct** – Train and evaluate a logistic regression model  
-- **Execute** – Interpret results and propose business recommendations  
+What factors are most likely to cause an employee to leave the company?
 
-## Model Performance
-A logistic regression model was trained to predict employee attrition.
+From a modeling perspective, this is a binary classification problem. From a business perspective, it’s a decision-support problem.
 
-- **Accuracy:** ~83%  
-- **Recall (Attrition):** ~88%  
-- **Precision (Attrition):** ~80%  
-- **F1-score:** ~0.84  
+**Prediction is the tool. Insight is the product.**
 
-The model performs well at identifying employees likely to leave, making it suitable as an early warning tool to support HR decision-making.
+### 📁 Dataset Overview
 
-## Key Insights
-- Employee satisfaction is the strongest predictor of attrition  
-- Employees with low and medium salaries are significantly more likely to leave  
-- Promotions substantially reduce the likelihood of attrition  
-- Longer tenure and high performance evaluations may indicate burnout or external job opportunities  
+The dataset contains ~15,000 employee records with the following features:
 
-## Tools & Technologies
-- Python  
-- Pandas, NumPy  
-- Matplotlib, Seaborn  
-- Scikit-learn  
+| **Feature**	| **Description** |
+| ----------- | --------------- |
+| satisfaction_level	| Employee-reported job satisfaction (0–1) |
+| last_evaluation	| Performance review score (0–1) |
+| number_project	| Number of projects |
+| average_monthly_hours	| Average monthly working hours |
+| time_spend_company	| Tenure (years) |
+| work_accident	Work | accident indicator |
+| promotion_last_5years	| Promotion indicator |
+| department	| Department |
+| salary	| Salary category |
+| left	| Attrition outcome (target variable) |
 
-## Ethical Considerations
-- Employee privacy and data security were maintained  
-- Model predictions are intended to support—not replace—human judgment  
-- Results should be used to improve employee experience, not penalize individuals  
+After removing duplicates, ~16.6% of employees had left the company.
 
-## Repository Structure
-- `notebook.ipynb` – Full data analysis, visualizations, modeling, and evaluation  
-- `README.md` – Project overview and high-level results  
+### 🧹 Data Preparation
 
-## Notes
-This project was completed as a capstone-style analysis and is intended for educational and portfolio purposes.
+Key preprocessing steps included:
 
-For detailed analysis, visualizations, and model implementation, please refer to the Jupyter notebook included in this repository.
+* Removal of **3,008 duplicate rows**
+
+* Standardized column naming (snake_case)
+
+* **Outlier capping** for tenure using the IQR method
+
+* One-hot encoding for salary
+
+* **Upsampling** the minority class to address class imbalance
+
+The goal was not perfect data, but **reliable signal without distortion**.
+
+### 📊 Exploratory Data Analysis (EDA)
+
+Key findings from EDA:
+
+* No severe multicollinearity among numerical features
+
+* Attrition clusters at **both low and high satisfaction levels**
+
+* Workload and performance extremes increase attrition risk
+
+* Longer tenure correlates with higher likelihood of leaving
+
+* Salary has a strong relationship with attrition
+
+* Department showed minimal impact and was excluded from modeling
+
+### 🤖 Model Selection & Training
+
+**Model used:** Logistic Regression
+**Why?**
+
+* Interpretable coefficients
+
+* Suitable for binary classification
+
+* Easy to communicate to non-technical stakeholders
+
+The data was split into:
+
+* **75% training**
+
+* **25% testing**
+
+### 📈 Model Performance
+|**Metric**	| **Score** |
+| -------- | :--: |
+| Accuracy |	83% |
+| Recall (Left)	| 88% |
+| Precision (Left)	| 80% |
+
+High recall was prioritized to ensure employees at risk of leaving are identified early.
+
+### 🧠 Key Insights from Model Coefficients
+
+* **Satisfaction dominates everything**
+
+* **Low and medium salaries increase attrition**
+
+* **Promotions strongly reduce attrition**
+
+* **Longer tenure increases risk**, suggesting growth ceilings
+
+* **Work accidents correlate with retention**
+
+This reinforces that **engagement and career growth matter more than raw workload alone**.
+
+### 💼 Business Recommendations
+
+Based on the analysis:
+
+* Track employee satisfaction continuously (not just annually)
+
+* Re-evaluate low and medium salary bands against market benchmarks
+
+* Create visible growth paths for long-tenured employees
+
+* Monitor workload extremes as early burnout signals
+
+* Use the model as an **early-warning system**, not a decision-maker
+
+### ⚠️ Limitations & Future Work
+
+* Logistic regression assumes linear relationships
+
+* Upsampling may inflate performance metrics
+
+Future improvements:
+
+* Tree-based models (Random Forest, XGBoost)
+
+* Cost-sensitive learning
+
+* Time-based attrition modeling
+
+* Richer features (role level, engagement surveys)
+
+### 📄 Project Artifacts
+
+* 📓 **Jupyter Notebook:**
+notebooks/employee_attrition_analysis.ipynb
+
+* 📄 **Notebook PDF:**
+reports/employee_attrition_notebook.pdf
+
+* ✍️ **Medium Blog Post:**
+(Add link here once published)
+
+### 🛠️ Tech Stack
+
+* Python
+
+* Pandas, NumPy
+
+* Matplotlib, Seaborn
+
+* Scikit-learn
+
+### 📌 Disclaimer
+
+This project uses a **fictional dataset and business scenario** provided by Coursera. It is intended for educational and portfolio purposes only.
